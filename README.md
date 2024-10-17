@@ -1,6 +1,6 @@
 # OpenAI Jest Test Generator
 
-This project uses the OpenAI API to automatically generate Jest tests for JavaScript files.
+This project uses the OpenAI API to automatically generate Jest tests for JavaScript files, with a beautiful and informative command-line interface.
 
 ## Setup
 
@@ -37,6 +37,69 @@ The application can generate tests for a single file or all JavaScript files in 
   ```
 
 The generated test files will be saved with the same name as the original file, but with a `.test.js` extension.
+
+## Sample Code
+
+Here's an example of how to use the OpenAI Jest Test Generator:
+
+1. Create a file named `sample.js` with the following content:
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+module.exports = { add, subtract };
+```
+
+2. Run the test generator:
+
+```
+node src/index.js sample.js
+```
+
+3. The generator will create a file named `sample.test.js` with content similar to:
+
+```javascript
+const { add, subtract } = require("./sample");
+
+describe("add function", () => {
+  test("adds two positive numbers correctly", () => {
+    expect(add(2, 3)).toBe(5);
+  });
+
+  test("adds a positive and a negative number correctly", () => {
+    expect(add(5, -3)).toBe(2);
+  });
+});
+
+describe("subtract function", () => {
+  test("subtracts two positive numbers correctly", () => {
+    expect(subtract(5, 3)).toBe(2);
+  });
+
+  test("subtracts a negative number correctly", () => {
+    expect(subtract(5, -3)).toBe(8);
+  });
+});
+```
+
+You can then run these tests using Jest:
+
+```
+npx jest sample.test.js
+```
+
+## Features
+
+- Colorful console output for better readability
+- Loading spinners to show progress
+- Clear success and error messages
+- Summary of processed files and generated tests
 
 ## Note
 

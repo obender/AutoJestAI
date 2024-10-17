@@ -1,0 +1,22 @@
+{
+  "name": "ai-jest-generator",
+  "version": "1.0.0",
+  "description": "An open-source tool that uses OpenAI to generate Jest tests for a given folder or file",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "jest",
+    "test",
+    "generator",
+    "openai",
+    "ai"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^3.2.1",
+    "glob": "^8.1.0"
+  }
+}

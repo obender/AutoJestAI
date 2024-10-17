@@ -1,24 +1,26 @@
-# OpenAI Jest Test Generator
+# auto-jest-ai
 
 This project uses the OpenAI API to automatically generate Jest tests for JavaScript files, with a beautiful and informative command-line interface.
 
+## Installation
+
+Install the package globally:
+
+```
+npm install -g auto-jest-ai
+```
+
 ## Setup
 
-1. Install dependencies:
-
-   ```
-   npm install
-   ```
-
-2. Set your OpenAI API key as an environment variable:
+1. Set your OpenAI API key as an environment variable:
 
    ```
    export OPENAI_API_KEY='your-api-key-here'
    ```
 
-3. Run the application:
+2. Run the application:
    ```
-   node src/index.js <path-to-file-or-folder>
+   auto-jest-ai <path-to-file-or-folder>
    ```
 
 ## Usage
@@ -28,12 +30,12 @@ The application can generate tests for a single file or all JavaScript files in 
 - For a single file:
 
   ```
-  node src/index.js path/to/your/file.js
+  auto-jest-ai path/to/your/file.js
   ```
 
 - For a folder:
   ```
-  node src/index.js path/to/your/folder
+  auto-jest-ai path/to/your/folder
   ```
 
 The generated test files will be saved with the same name as the original file, but with a `.test.js` extension.
@@ -59,7 +61,7 @@ module.exports = { add, subtract };
 2. Run the test generator:
 
 ```
-node src/index.js sample.js
+auto-jest-ai sample.js
 ```
 
 3. The generator will create a file named `sample.test.js` with content similar to:

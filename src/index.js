@@ -1,9 +1,13 @@
-const fs = require("fs");
-const path = require("path");
-const OpenAI = require("openai");
-const glob = require("glob");
-const chalk = require("chalk");
-const ora = require("ora");
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import OpenAI from "openai";
+import glob from "glob";
+import chalk from "chalk";
+import ora from "ora";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -55,8 +59,7 @@ async function processFolder(folderPath) {
   }
 }
 
-// Main function
-async function main() {
+export async function main() {
   console.log(chalk.bold.magenta("\n🚀 OpenAI Jest Test Generator 🚀\n"));
 
   const args = process.argv.slice(2);
@@ -80,6 +83,8 @@ async function main() {
   console.log(chalk.bold.green("\n✨ All tests generated successfully! ✨"));
 }
 
-main().catch((error) => {
-  console.error(chalk.red("An error occurred:"), error);
-});
+if (import.meta.url === `file://${__filename}`) {
+  main().catch((error) => {
+    console.error(chalk.red("An error occurred:"), error);
+  });
+}

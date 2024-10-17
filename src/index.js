@@ -1,29 +1,26 @@
 const fs = require("fs");
 const path = require("path");
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 const glob = require("glob");
 
-// Initialize OpenAI API
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 async function generateTest(filePath) {
   const fileContent = fs.readFileSync(filePath, "utf8");
 
-  const prompt = `Generate a Jest test for the following code:\n\n${fileContent}\n\nJest test:`;
-
-  const response = await openai.createCompletion({
-    model: "text-davinci-002",
-    prompt: prompt,
+  const response = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "system", content: "You are a helpful assistant that generates Jest tests." },
+      { role: "user", content: `Generate a Jest test for the following code:\n\n${fileContent}` },
+    ],
     max_tokens: 500,
-    n: 1,
-    stop: null,
     temperature: 0.7,
   });
 
-  return response.data.choices[0].text.trim();
+  return response.choices[0].message.content.trim();
 }
 
 async function processFile(filePath) {

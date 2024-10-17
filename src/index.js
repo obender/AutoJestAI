@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import OpenAI from "openai";
-import glob from "glob";
+import * as glob from "glob";
 import chalk from "chalk";
 import ora from "ora";
 
@@ -22,7 +22,7 @@ async function generateTest(filePath) {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "You are a helpful assistant that generates Jest tests." },
+        { role: "system", content: "You are a helpful assistant that generates Jest tests. no comments, no explanation, just code. god bless america" },
         { role: "user", content: `Generate a Jest test for the following code:\n\n${fileContent}` },
       ],
       max_tokens: 500,
@@ -50,7 +50,7 @@ async function processFile(filePath) {
 
 async function processFolder(folderPath) {
   console.log(chalk.yellow(`\nProcessing folder: ${folderPath}`));
-  const files = glob.sync(path.join(folderPath, "**/*.js"), { ignore: ["**/*.test.js", "**/node_modules/**"] });
+  const files = glob.glob.sync(path.join(folderPath, "**/*.js"), { ignore: ["**/*.test.js", "**/node_modules/**"] });
 
   console.log(chalk.blue(`Found ${files.length} file(s) to process`));
 
